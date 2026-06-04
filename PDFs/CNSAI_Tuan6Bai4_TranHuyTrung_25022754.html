@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sử dụng AI có trách nhiệm trong học thuật</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:#f0ede6;color:#1a1a2e;min-height:100vh;}
+  .page{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
+
+  /* HEADER */
+  .header{background:#1a1a2e;border-radius:20px;padding:48px 48px 40px;margin-bottom:28px;position:relative;overflow:hidden;}
+  .header::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:rgba(255,255,255,0.04);border-radius:50%;}
+  .header::after{content:'';position:absolute;bottom:-40px;left:40px;width:160px;height:160px;background:rgba(99,179,237,0.07);border-radius:50%;}
+  .tag{display:inline-block;background:#4299e1;color:#fff;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;letter-spacing:0.05em;margin-bottom:16px;text-transform:uppercase;}
+  .header h1{font-family:'Playfair Display',serif;font-size:36px;color:#fff;line-height:1.2;margin-bottom:12px;}
+  .header h1 span{color:#63b3ed;}
+  .header p{color:#a0aec0;font-size:15px;max-width:520px;line-height:1.7;}
+  .school-badge{margin-top:24px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:30px;padding:8px 16px;}
+  .school-badge span{color:#e2e8f0;font-size:13px;font-weight:500;}
+
+  /* GRID LAYOUT */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;}
+  .full{grid-column:1/-1;}
+
+  /* SECTION LABEL */
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#718096;margin-bottom:10px;}
+
+  /* CARDS */
+  .card{background:#fff;border-radius:16px;padding:24px;position:relative;}
+  .card-accent{border-top:4px solid;}
+  .blue{border-color:#4299e1;}
+  .teal{border-color:#38b2ac;}
+  .orange{border-color:#ed8936;}
+  .red{border-color:#fc8181;}
+  .purple{border-color:#9f7aea;}
+  .green{border-color:#68d391;}
+
+  .card h2{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .icon-blue{background:#ebf8ff;}
+  .icon-teal{background:#e6fffa;}
+  .icon-orange{background:#fffaf0;}
+  .icon-red{background:#fff5f5;}
+  .icon-purple{background:#faf5ff;}
+  .icon-green{background:#f0fff4;}
+
+  /* POLICY SECTION */
+  .policy-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;}
+  .policy-row:last-child{margin-bottom:0;}
+  .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+  .dot-blue{background:#4299e1;}
+  .dot-red{background:#fc8181;}
+  .policy-text{font-size:13.5px;color:#4a5568;line-height:1.6;}
+
+  /* ETHICS MATRIX */
+  .ethics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .ethics-item{border-radius:12px;padding:16px;}
+  .ethics-allow{background:#f0fff4;border:1px solid #c6f6d5;}
+  .ethics-forbid{background:#fff5f5;border:1px solid #fed7d7;}
+  .ethics-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;}
+  .ethics-allow .ethics-label{color:#276749;}
+  .ethics-forbid .ethics-label{color:#9b2c2c;}
+  .ethics-list{list-style:none;}
+  .ethics-list li{font-size:13px;color:#4a5568;padding:4px 0;padding-left:16px;position:relative;line-height:1.5;}
+  .ethics-list li::before{position:absolute;left:0;font-weight:700;}
+  .ethics-allow .ethics-list li::before{content:'✓';color:#38a169;}
+  .ethics-forbid .ethics-list li::before{content:'✗';color:#e53e3e;}
+
+  /* PROMPTS TABLE */
+  .prompt-item{border-radius:10px;background:#f7fafc;border:1px solid #e2e8f0;padding:14px 16px;margin-bottom:10px;}
+  .prompt-item:last-child{margin-bottom:0;}
+  .prompt-q{font-size:12px;font-weight:600;color:#2b6cb0;margin-bottom:6px;}
+  .prompt-a{font-size:13px;color:#4a5568;line-height:1.6;}
+  .prompt-tag{display:inline-block;font-size:11px;background:#bee3f8;color:#2c5282;padding:2px 8px;border-radius:10px;margin-bottom:6px;}
+
+  /* PRINCIPLES */
+  .principle-list{counter-reset:p;}
+  .principle-item{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f0ede6;}
+  .principle-item:last-child{border-bottom:none;}
+  .p-num{width:32px;height:32px;border-radius:50%;background:#1a1a2e;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .p-text strong{display:block;font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:3px;}
+  .p-text span{font-size:13px;color:#718096;line-height:1.5;}
+
+  /* STATS ROW */
+  .stat-card{background:#1a1a2e;border-radius:16px;padding:24px;text-align:center;}
+  .stat-num{font-size:38px;font-weight:800;color:#63b3ed;line-height:1;}
+  .stat-label{font-size:13px;color:#a0aec0;margin-top:8px;line-height:1.5;}
+
+  /* PROCESS FLOW */
+  .flow{display:flex;gap:0;align-items:stretch;margin-top:4px;}
+  .flow-step{flex:1;background:#f7fafc;border:1px solid #e2e8f0;padding:14px 12px;text-align:center;position:relative;}
+  .flow-step:first-child{border-radius:10px 0 0 10px;}
+  .flow-step:last-child{border-radius:0 10px 10px 0;}
+  .flow-step:not(:last-child)::after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);font-size:14px;color:#a0aec0;z-index:1;background:#f0ede6;width:22px;display:flex;align-items:center;justify-content:center;}
+  .flow-num{font-size:11px;font-weight:700;color:#a0aec0;margin-bottom:4px;}
+  .flow-label{font-size:12.5px;font-weight:600;color:#1a1a2e;line-height:1.4;}
+
+  /* FOOTER */
+  .footer{text-align:center;margin-top:32px;font-size:12px;color:#a0aec0;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="tag">Infographic học thuật</div>
+    <h1>Sử dụng AI<br><span>có trách nhiệm</span><br>trong học thuật</h1>
+    <p>Hướng dẫn thực hành cho sinh viên về cách tận dụng AI hiệu quả, đúng đắn và minh bạch trong quá trình học tập và nghiên cứu.</p>
+    <div class="school-badge">
+      <span>🏛 Trường Đại học Công nghệ – ĐHQGHN</span>
+    </div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="grid3" style="margin-bottom:20px;">
+    <div class="stat-card">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Bước quy trình<br>sử dụng AI minh bạch</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Nguyên tắc cá nhân<br>sử dụng AI có trách nhiệm</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Vấn đề đạo đức<br>cốt lõi cần lưu ý</div>
+    </div>
+  </div>
+
+  <!-- POLICY + ETHICS -->
+  <div class="grid2">
+    <!-- Policy -->
+    <div class="card card-accent blue">
+      <h2><div class="icon icon-blue">📋</div>Chính sách VNU-UET</h2>
+      <div class="section-label" style="margin-bottom:12px;">Được phép ✓</div>
+      <div class="policy-row">
+        <div class="dot dot-blue"></div>
+        <div class="policy-text">Dùng AI hỗ trợ tìm kiếm thông tin và hiểu khái niệm</div>
+      </div>
+      <div class="policy-row">
+        <div class="dot dot-blue"></div>
+        <div class="policy-text">Dùng AI kiểm tra ngữ pháp, lỗi chính tả</div>
+      </div>
+      <div class="policy-row">
+        <div class="dot dot-blue"></div>
+        <div class="policy-text">Khai báo rõ ràng công cụ AI và prompt đã sử dụng</div>
+      </div>
+      <div style="margin-top:16px;" class="section-label">Nghiêm cấm ✗</div>
+      <div class="policy-row" style="margin-top:10px;">
+        <div class="dot dot-red"></div>
+        <div class="policy-text">Nộp bài do AI tạo toàn bộ mà không khai báo</div>
+      </div>
+      <div class="policy-row">
+        <div class="dot dot-red"></div>
+        <div class="policy-text">Dùng AI thay thế hoàn toàn tư duy cá nhân</div>
+      </div>
+      <div class="policy-row">
+        <div class="dot dot-red"></div>
+        <div class="policy-text">Gian lận học thuật qua AI có thể bị đình chỉ học</div>
+      </div>
+    </div>
+
+    <!-- Ethics -->
+    <div class="card card-accent purple">
+      <h2><div class="icon icon-purple">⚖️</div>3 Vấn đề đạo đức cốt lõi</h2>
+      <div style="margin-bottom:14px;">
+        <div style="font-size:13.5px;font-weight:700;color:#553c9a;margin-bottom:6px;">1. Ranh giới hỗ trợ & gian lận</div>
+        <div style="font-size:13px;color:#4a5568;line-height:1.6;">AI hỗ trợ hợp lý khi người học tư duy trước, AI chỉ cải thiện sản phẩm. Gian lận khi AI thay thế hoàn toàn quá trình tư duy.</div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div style="font-size:13.5px;font-weight:700;color:#553c9a;margin-bottom:6px;">2. Quyền sở hữu trí tuệ & trích dẫn</div>
+        <div style="font-size:13px;color:#4a5568;line-height:1.6;">Luật Việt Nam không công nhận AI là tác giả. Cần trích dẫn AI theo chuẩn APA 2023: Tên công cụ, năm, phiên bản, nhà phát triển, URL.</div>
+      </div>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:#553c9a;margin-bottom:6px;">3. Tác động đến phát triển kỹ năng</div>
+        <div style="font-size:13px;color:#4a5568;line-height:1.6;">Phụ thuộc AI làm mất cơ hội học sâu. Dùng AI sau khi tự làm mới kích hoạt "testing effect" – học hiệu quả hơn.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS FLOW -->
+  <div class="card" style="margin-bottom:20px;">
+    <h2 style="margin-bottom:16px;"><div class="icon icon-teal">🔄</div>Quy trình sử dụng AI minh bạch</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">Bước 1</div>
+        <div class="flow-label">Tự làm<br>phác thảo</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Bước 2</div>
+        <div class="flow-label">Dùng AI<br>hỗ trợ</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Bước 3</div>
+        <div class="flow-label">Kiểm tra &<br>chỉnh sửa</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Bước 4</div>
+        <div class="flow-label">Khai báo<br>minh bạch</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT EXAMPLES + PRINCIPLES -->
+  <div class="grid2">
+    <!-- Prompt examples -->
+    <div class="card card-accent teal">
+      <h2><div class="icon icon-teal">💬</div>Ví dụ prompt hiệu quả</h2>
+      <div class="prompt-item">
+        <div class="prompt-tag">Tổng hợp kiến thức</div>
+        <div class="prompt-q">"Liệt kê các phương pháp ML phổ biến để phát hiện gian lận tài chính, kèm ưu nhược điểm."</div>
+        <div class="prompt-a">→ Nhận danh sách, tự lọc và bổ sung ví dụ từ tài liệu đã đọc</div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-tag">Kiểm tra ngôn ngữ</div>
+        <div class="prompt-q">"Kiểm tra ngữ pháp đoạn văn sau, không thay đổi nội dung: [đoạn văn]"</div>
+        <div class="prompt-a">→ Chỉ chấp nhận gợi ý ngữ pháp, giữ nguyên nội dung và phong cách</div>
+      </div>
+      <div class="prompt-item">
+        <div class="prompt-tag">Gợi ý cấu trúc</div>
+        <div class="prompt-q">"Gợi ý cấu trúc phần Introduction cho báo cáo về [chủ đề]."</div>
+        <div class="prompt-a">→ Lấy cấu trúc làm khung, tự viết nội dung hoàn chỉnh</div>
+      </div>
+    </div>
+
+    <!-- Principles -->
+    <div class="card card-accent orange">
+      <h2><div class="icon icon-orange">🎯</div>7 Nguyên tắc cá nhân</h2>
+      <div class="principle-list">
+        <div class="principle-item">
+          <div class="p-num">1</div>
+          <div class="p-text"><strong>Tự làm trước, AI sau</strong><span>Phác thảo ý tưởng cá nhân trước khi nhờ AI hỗ trợ</span></div>
+        </div>
+        <div class="principle-item">
+          <div class="p-num">2</div>
+          <div class="p-text"><strong>Xác minh mọi thông tin</strong><span>Đối chiếu với tài liệu đáng tin cậy, tránh "hallucination"</span></div>
+        </div>
+        <div class="principle-item">
+          <div class="p-num">3</div>
+          <div class="p-text"><strong>Khai báo minh bạch</strong><span>Ghi rõ công cụ, prompt và mức độ sử dụng AI</span></div>
+        </div>
+        <div class="principle-item">
+          <div class="p-num">4</div>
+          <div class="p-text"><strong>Bảo vệ kỹ năng cốt lõi</strong><span>Không dùng AI thay thế những kỹ năng cần phát triển</span></div>
+        </div>
+        <div class="principle-item">
+          <div class="p-num">5</div>
+          <div class="p-text"><strong>Học sâu, không học nhanh</strong><span>Dùng AI để hiểu sâu hơn, không chỉ để hoàn thành nhanh</span></div>
+        </div>
+        <div class="principle-item">
+          <div class="p-num">6</div>
+          <div class="p-text"><strong>Tôn trọng bản quyền</strong><span>Trích dẫn nguồn gốc dù có diễn đạt lại qua AI</span></div>
+        </div>
+        <div class="principle-item" style="border-bottom:none;">
+          <div class="p-num">7</div>
+          <div class="p-text"><strong>Phản ánh & điều chỉnh</strong><span>Định kỳ tự đánh giá cách dùng AI trong học tập</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DO / DON'T -->
+  <div class="card" style="margin-bottom:20px;">
+    <h2 style="margin-bottom:16px;"><div class="icon icon-green">✅</div>Làm & Không làm – Bảng tóm tắt</h2>
+    <div class="ethics-grid">
+      <div class="ethics-item ethics-allow">
+        <div class="ethics-label">Nên làm</div>
+        <ul class="ethics-list">
+          <li>Dùng AI để brainstorm ý tưởng ban đầu</li>
+          <li>Xác minh thông tin AI với nguồn độc lập</li>
+          <li>Viết lại hoàn toàn bằng ngôn ngữ cá nhân</li>
+          <li>Khai báo công cụ AI và prompt đã sử dụng</li>
+          <li>Dùng AI giải thích khái niệm khó hiểu</li>
+        </ul>
+      </div>
+      <div class="ethics-item ethics-forbid">
+        <div class="ethics-label">Không nên làm</div>
+        <ul class="ethics-list">
+          <li>Copy nguyên đầu ra AI vào bài nộp</li>
+          <li>Dùng AI giải bài thi, kiểm tra</li>
+          <li>Không kiểm tra thông tin AI cung cấp</li>
+          <li>Dùng AI viết toàn bộ luận văn, đồ án</li>
+          <li>Che giấu việc đã sử dụng AI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <div class="footer">
+    <p>Trường Đại học Công nghệ – Đại học Quốc gia Hà Nội &nbsp;|&nbsp; Bài tập: Sử dụng AI có trách nhiệm trong học thuật &nbsp;|&nbsp; 2026</p>
+  </div>
+
+</div>
+</body>
+</html>
