@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minh chứng các bài tập đã hoàn thành">
+    <title>Dự án | Trần Huy Trung</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav aria-label="Điều hướng chính">
+            <div class="brand">THT.PORTFOLIO</div>
+            <ul>
+                <li><a href="index.html" class="nav-link">Giới thiệu</a></li>
+                <li><a href="projects.html" class="nav-link active">Kết quả Bài tập</a></li>
+                <li><a href="summary.html" class="nav-link">Tổng kết</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container page-transition">
+        <section aria-labelledby="projects-heading">
+            <div class="section-header-flex">
+                <h2 id="projects-heading" class="section-title">Hệ thống Bài tập Tích hợp</h2>
+                <span id="dynamic-title" class="active-title hidden"></span>
+                <div class="action-buttons">
+                    <button id="btn-close-viewer" class="btn-back hidden">⟵ Trở lại danh sách</button>
+                </div>
+            </div>
+            
+            <div id="projects-grid" class="grid-container">
+                <article class="card">
+                    <span class="card-tag">Hệ thống File</span>
+                    <h3>Bài 1: Cấu trúc Thư mục & Tệp tin</h3>
+                    <p>Thiết lập quy tắc định danh nghiêm ngặt và tổ chức dữ liệu dạng cây thư mục, tối ưu hóa truy xuất cho các đồ án kỹ thuật.</p>
+                    <button class="btn view-doc-btn" data-title="Bài 1: Cấu trúc Thư mục & Tệp tin" data-src="PDFs/CNSAI_Tuan1Bai1_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                </article>
+
+                <article class="card">
+                    <span class="card-tag">Nghiên cứu Học thuật</span>
+                    <h3>Bài 2: Khai thác Dữ liệu Nâng cao</h3>
+                    <p>Ứng dụng toán tử tìm kiếm chuyên sâu (Boolean Operators) để trích xuất và lập bảng đánh giá chất lượng các nguồn tài liệu tin cậy.</p>
+                    <button class="btn view-doc-btn" data-title="Bài 2: Khai thác Dữ liệu Nâng cao" data-src="PDFs/CNSAI_Tuan2Bai1_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                </article>
+
+                <article class="card">
+                    <span class="card-tag">Kỹ thuật Prompt</span>
+                    <h3>Bài 3: Tối ưu hóa Trí tuệ Nhân tạo</h3>
+                    <p>Phân tích đối chiếu chất lượng đầu ra giữa câu lệnh (Prompt) nguyên thủy và Prompt đa lớp được cung cấp ngữ cảnh chuyên môn sâu.</p>
+                    <button class="btn view-doc-btn" data-title="Bài 3: Tối ưu hóa Trí tuệ Nhân tạo" data-src="PDFs/CNSAI_Tuan3Bai2_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                </article>
+
+                <article class="card">
+                    <span class="card-tag">Hợp tác & Quản trị</span>
+                    <h3>Bài 4: Giao tiếp Môi trường Số</h3>
+                    <p>Điều phối tiến độ làm việc nhóm trực tuyến thông qua việc phân rã công việc (WBS) trên các nền tảng quản trị dự án hiện đại.</p>
+                    <button class="btn view-doc-btn" data-title="Bài 4: Giao tiếp Môi trường Số" data-src="PDFs/CNSAI_Tuan4Bai1_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                </article>
+
+                <article class="card">
+                    <span class="card-tag">Sáng tạo & AI</span>
+                    <h3>Bài 5: Sáng tạo Nội dung Số</h3>
+                    <p>Sản phẩm học thuật hoàn thiện được xây dựng dưới sự tinh chỉnh, định hướng và hỗ trợ có kiểm soát từ các mô hình AI tạo sinh.</p>
+                    <button class="btn view-doc-btn" data-title="Bài 5: Sáng tạo Nội dung Số" data-src="PDFs/CNSAI_Tuan5Bai2_TranHuyTrung_25022754.png">Đọc tài liệu</button>
+                </article>
+
+                <article class="card">
+                    <span class="card-tag">Đạo đức Hệ thống</span>
+                    <h3>Bài 6: Liêm chính Học thuật</h3>
+                    <p>Bộ quy chuẩn cá nhân thiết lập ranh giới rõ ràng về tính minh bạch khi áp dụng công nghệ số và AI vào quá trình nghiên cứu khoa học.</p>
+                    <button class="btn view-doc-btn" data-title="Bài 6: Liêm chính Học thuật" data-src="PDFs/CNSAI_Tuan6Bai1_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                </article>
+            </div>
+
+            <div id="native-viewer" class="native-container hidden">
+                <div id="loading-spinner" class="spinner hidden">Đang dựng hình tài liệu ở độ phân giải cao...</div>
+                <div id="document-render-area" class="document-area"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Trần Huy Trung - MSSV: 25022754. Mọi tài liệu tuân thủ nguyên tắc liêm chính học thuật.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
