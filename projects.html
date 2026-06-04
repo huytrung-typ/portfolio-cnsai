@@ -6,7 +6,18 @@
     <meta name="description" content="Minh chứng các bài tập đã hoàn thành">
     <title>Dự án | Trần Huy Trung</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <link rel="prefetch" href="index.html">
+    <link rel="prefetch" href="summary.html">
+
+    <!-- CSS CỤC BỘ: ÉP KÍCH THƯỚC CHỮ ĐỂ NỘI DUNG FIT VỪA 1 MÀN HÌNH -->
+    <style>
+        .viewer-sidebar { padding: 1.5rem !important; }
+        .viewer-sidebar h4 { font-size: 1.05rem !important; margin-top: 1rem !important; margin-bottom: 0.3rem !important; }
+        .viewer-sidebar p, .viewer-sidebar ul { font-size: 0.95rem !important; margin-bottom: 0.5rem !important; line-height: 1.5 !important; }
+        .viewer-sidebar li { margin-bottom: 0.3rem !important; }
+        .pdf-link-container { margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed #ccc; font-weight: 500; font-size: 0.95rem; }
+    </style>
 </head>
 <body>
     <header>
@@ -20,7 +31,7 @@
         </nav>
     </header>
 
-    <main class="page-container page-transition">
+    <main class="page-container page-transition" id="main-container">
         <section aria-labelledby="projects-heading">
             <div class="section-header-flex">
                 <h2 id="projects-heading" class="section-title">Hệ thống Bài tập Tích hợp</h2>
@@ -31,52 +42,164 @@
             </div>
             
             <div id="projects-grid" class="grid-container">
+                
+                <!-- BÀI 1 -->
                 <article class="card">
-                    <span class="card-tag">Hệ thống File</span>
-                    <h3>Bài 1: Cấu trúc Thư mục & Tệp tin</h3>
-                    <p>Bài này ghi lại các thao các cơ bản để rèn luyện kĩ năng tạo, đổi tên, sao chép, di chuyển và xóa thư mục một cách thành thạo trên Windows.</p>
-                    <button class="btn view-doc-btn" data-title="Bài 1: Cấu trúc Thư mục & Tệp tin" data-src="PDFs/CNSAI_Tuan1Bai1_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                    <span class="card-tag">Bài tập 1 - Mục 1.4</span>
+                    <h3>Bài 1: Thao tác cơ bản với tệp tin và thư mục</h3>
+                    <p>Trình bày các thao tác với tệp tin và thư mục trên hệ điều hành Windows.</p>
+                    
+                    <div class="project-details-data hidden">
+                        <h4>Mục tiêu:</h4>
+                        <p>Rèn luyện kỹ năng tạo, đổi tên, sao chép, di chuyển, xóa tệp tin và thư mục một cách thành thạo trên hệ điều hành.</p>
+                        <h4>Quá trình thực hiện:</h4>
+                        <ul>
+                            <li>Tạo thư mục mới và tệp tin văn bản (GhiChu.txt).</li>
+                            <li>Thực hiện đổi tên tệp và tạo thư mục con (TaiLieu).</li>
+                            <li>Sử dụng lệnh Copy & Paste để sao chép tệp.</li>
+                            <li>Thực hiện Cut & Paste để di chuyển tệp tin.</li>
+                            <li>Xóa tệp vào Recycle Bin, xóa vĩnh viễn (Shift+Delete) và khôi phục tệp.</li>
+                        </ul>
+                        <div class="pdf-link-container">
+                            Xem toàn bộ PDF <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan1Bai1_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a>
+                        </div>
+                    </div>
+                    <button class="btn view-doc-btn" data-title="Bài 1: Thao tác cơ bản với tệp tin và thư mục" data-src="PDFs/CNSAI_Tuan1Bai1_TranHuyTrung_25022754.pdf">Xem chi tiết</button>
                 </article>
 
+                <!-- BÀI 2 -->
                 <article class="card">
-                    <span class="card-tag">Nghiên cứu Học thuật</span>
-                    <h3>Bài 2: Khai thác Dữ liệu Nâng cao</h3>
-                    <p>Không còn kiểu "Google search đại" và lấy link đầu tiên. tôi áp dụng các toán tử tìm kiếm nâng cao để đào sâu, lọc ra các báo cáo học thuật uy tín phục vụ cho việc làm đồ án trên đại học.</p>
-                    <button class="btn view-doc-btn" data-title="Bài 2: Khai thác Dữ liệu Nâng cao" data-src="PDFs/CNSAI_Tuan2Bai2_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                    <span class="card-tag">Bài tập 2 - Mục 2.4</span>
+                    <h3>Bài 2: Tìm kiếm và đánh giá thông tin học thuật</h3>
+                    <p>Thu thập tài liệu chuyên ngành và thực hiện đánh giá độ tin cậy của các nguồn thông tin dựa trên các tiêu chí học thuật.</p>
+                    
+                    <div class="project-details-data hidden">
+                        <h4>Mục tiêu:</h4>
+                        <p>Phát triển kỹ năng tìm kiếm và đánh giá thông tin học thuật từ các nguồn đáng tin cậy.</p>
+                        <h4>Quá trình thực hiện:</h4>
+                        <ul>
+                            <li>Chọn chủ đề liên quan đến ngành học Tự động hóa là <strong>Bộ điều khiển PID</strong>.</li>
+                            <li>Tìm kiếm trên CSDL học thuật (Google Scholar), tạp chí, sách và internet.</li>
+                            <li>Thu thập 12 tài liệu tham khảo (bao gồm 5 bài báo khoa học).</li>
+                            <li>Đánh giá độ tin cậy dựa trên: Tác giả, cơ quan, phương pháp nghiên cứu, trích dẫn và tính cập nhật.</li>
+                            <li>Tạo bảng tổng hợp đánh giá và xếp hạng độ tin cậy.</li>
+                        </ul>
+                        <div class="pdf-link-container">
+                            Xem toàn bộ PDF <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan2Bai2_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a>
+                        </div>
+                    </div>
+                    <button class="btn view-doc-btn" data-title="Bài 2: Tìm kiếm và đánh giá thông tin học thuật" data-src="PDFs/CNSAI_Tuan2Bai2_TranHuyTrung_25022754.pdf">Xem chi tiết</button>
                 </article>
 
+                <!-- BÀI 3 -->
                 <article class="card">
-                    <span class="card-tag">Kỹ thuật Prompt</span>
-                    <h3>Bài 3: Tối ưu hóa Trí tuệ Nhân tạo</h3>
-                    <p>Thay vì hỏi ChatGPT những câu chung chung, tôi thử nghiệm cách "mớm" bối cảnh và đóng vai chuyên gia để ép AI nhả ra những câu trả lời có chiều sâu và đúng trọng tâm kỹ thuật hơn.</p>
-                    <button class="btn view-doc-btn" data-title="Bài 3: Tối ưu hóa Trí tuệ Nhân tạo" data-src="PDFs/CNSAI_Tuan3Bai2_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                    <span class="card-tag">Bài tập 2 - Mục 3.4</span>
+                    <h3>Bài 3: Viết Prompt hiệu quả cho các tác vụ học tập</h3>
+                    <p>Ứng dụng kỹ thuật Prompt Engineering để thiết kế các câu lệnh từ cơ bản đến nâng cao nhằm tối ưu hóa kết quả đầu ra từ AI.</p>
+                    
+                    <div class="project-details-data hidden">
+                        <h4>Mục tiêu:</h4>
+                        <p>Phát triển kỹ năng viết prompt hiệu quả để tận dụng tối đa khả năng của các mô hình ngôn ngữ lớn trong học tập.</p>
+                        <h4>Quá trình thực hiện:</h4>
+                        <ul>
+                            <li>Chọn tác vụ liên quan đến ngành <strong>Tự động hóa</strong>: Tóm tắt, giải thích khái niệm, hoặc tạo câu hỏi ôn tập.</li>
+                            <li>Viết 3 phiên bản: Prompt cơ bản, Prompt cải tiến, Prompt nâng cao.</li>
+                            <li>Thử nghiệm với công cụ AI (ChatGPT) và so sánh kết quả.</li>
+                            <li>Phân tích lý do tại sao prompt nâng cao hiệu quả hơn.</li>
+                            <li>Tổng hợp nguyên tắc và mẹo viết prompt hiệu quả.</li>
+                        </ul>
+                        <div class="pdf-link-container">
+                            Xem toàn bộ PDF <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan3Bai2_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a>
+                        </div>
+                    </div>
+                    <button class="btn view-doc-btn" data-title="Bài 3: Viết Prompt hiệu quả cho các tác vụ học tập" data-src="PDFs/CNSAI_Tuan3Bai2_TranHuyTrung_25022754.pdf">Xem chi tiết</button>
                 </article>
 
+                <!-- BÀI 4 -->
                 <article class="card">
-                    <span class="card-tag">Hợp tác & Quản trị</span>
-                    <h3>Bài 4: Giao tiếp Môi trường Số</h3>
-                    <p>Chấm dứt cảnh làm việc nhóm qua tin nhắn lộn xộn. tôi áp dụng thử các nền tảng quản lý dự án để chia việc, theo dõi tiến độ và ép deadline các thành viên trong nhóm một cách rõ ràng.</p>
-                    <button class="btn view-doc-btn" data-title="Bài 4: Giao tiếp Môi trường Số" data-src="PDFs/CNSAI_Tuan4Bai1_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                    <span class="card-tag">Bài tập 3 - Mục 4.4</span>
+                    <h3>Bài 4: Sử dụng công cụ hợp tác trực tuyến</h3>
+                    <p>Ghi nhận vai trò cá nhân trong việc sử dụng ít nhất 3 công cụ (quản lý, soạn thảo, lưu trữ) để phối hợp làm việc dự án nhóm.</p>
+                    
+                    <div class="project-details-data hidden">
+                        <h4>Mục tiêu:</h4>
+                        <p>Thành thạo các công cụ hợp tác trực tuyến và thể hiện năng lực quản lý, điều phối cá nhân trong dự án nhóm.</p>
+                        <h4>Quá trình thực hiện:</h4>
+                        <ul>
+                            <li>Sử dụng <strong>Trello</strong> để quản lý dự án, <strong>Google Docs</strong> để soạn thảo, <strong>Google Drive</strong> để lưu trữ và <strong>Messenger</strong> dể giao tiếp.</li>
+                            <li>Tự quản lý danh sách nhiệm vụ được giao trên hệ thống <strong>Trello</strong>.</li>
+                            <li>Tương tác, thảo luận và chỉnh sửa tài liệu cộng tác trực tuyến.</li>
+                            <li>Lập nhật ký minh chứng bằng ảnh chụp màn hình thể hiện rõ đóng góp cá nhân.</li>
+                        </ul>
+                        <div class="pdf-link-container">
+                            Xem toàn bộ PDF <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan4Bai1_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a>
+                        </div>
+                    </div>
+                    <button class="btn view-doc-btn" data-title="Bài 4: Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm" data-src="PDFs/CNSAI_Tuan4Bai1_TranHuyTrung_25022754.pdf">Xem chi tiết</button>
                 </article>
 
+                <!-- BÀI 5 -->
                 <article class="card">
-                    <span class="card-tag">Sáng tạo & AI</span>
-                    <h3>Bài 5: Sáng tạo Nội dung Số</h3>
-                    <p>Đây là sản phẩm tôi tự lên ý tưởng và dùng công cụ AI làm "trợ lý đồ họa/nội dung" để hỗ trợ hoàn thiện. Một bài test nhỏ về việc hợp tác với máy móc để tăng tốc độ làm việc.</p>
-                    <button class="btn view-doc-btn" data-title="Bài 5: Sáng tạo Nội dung Số" data-src="PDFs/CNSAI_Tuan5Bai2_TranHuyTrung_25022754.png">Đọc tài liệu</button>
+                    <span class="card-tag">Bài tập 2 - Mục 5.4</span>
+                    <h3>Bài 5: Sử dụng AI tạo sinh hỗ trợ sáng tạo nội dung</h3>
+                    <p>Ứng dụng kết hợp nhiều công cụ AI tạo sinh (Văn bản, Hình ảnh, Thiết kế) để hoàn thiện một dự án nội dung số chuyên nghiệp.</p>
+                    
+                    <div class="project-details-data hidden">
+                        <h4>Mục tiêu:</h4>
+                        <p>Thành thạo việc sử dụng các công cụ AI tạo sinh để hỗ trợ quá trình sáng tạo nội dung số.</p>
+                        <h4>Quá trình thực hiện:</h4>
+                        <ul>
+                            <li>Chọn dự án về <strong>Động cơ đốt trong 4 kỳ</strong>.</li>
+                            <li>Sử dụng 3 công cụ AI: <strong>ChatGPT, DALL-E, Canva AI></strong>.</li>
+                            <li>Ghi lại prompt, quá trình AI xuất kết quả và cách bản thân tinh chỉnh.</li>
+                            <li>Kết hợp đầu ra của AI với đóng góp sáng tạo cá nhân để hoàn thiện.</li>
+                            <li>Viết phân tích về vai trò, ưu nhược điểm của AI trong quá trình này.</li>
+                        </ul>
+                        <div class="pdf-link-container">
+                            Xem toàn bộ PDF <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan5Bai2_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a><br>
+                            Xem Infographic <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan5Bai2_TranHuyTrung_25022754.png" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a>
+                        </div>
+                    </div>
+                    <button class="btn view-doc-btn" data-title="Bài 5: Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung" data-src="PDFs/CNSAI_Tuan5Bai2_TranHuyTrung_25022754.pdf">Xem chi tiết</button>
                 </article>
 
+                <!-- BÀI 6 -->
                 <article class="card">
-                    <span class="card-tag">Đạo đức Hệ thống</span>
-                    <h3>Bài 6: Liêm chính Học thuật</h3>
-                    <p>Ranh giới giữa "dùng AI hỗ trợ" và "gian lận đạo văn" rất mỏng manh. Đây là bộ quy tắc sinh tồn tôi tự đặt ra để dùng AI làm đòn bẩy tư duy mà không vi phạm đạo đức học đường.</p>
-                    <button class="btn view-doc-btn" data-title="Bài 6: Liêm chính Học thuật" data-src="PDFs/CNSAI_Tuan6Bai4_TranHuyTrung_25022754.pdf">Đọc tài liệu</button>
+                    <span class="card-tag">Bài tập 4 - Mục 6.4</span>
+                    <h3>Bài 6: Sử dụng AI có trách nhiệm trong học thuật</h3>
+                    <p>Phân tích các khía cạnh đạo đức, ranh giới học thuật và xây dựng bộ nguyên tắc cá nhân, kết hợp thiết kế Infographic minh họa.</p>
+                    
+                    <div class="project-details-data hidden">
+                        <h4>Mục tiêu:</h4>
+                        <p>Phát triển kỹ năng sử dụng AI có trách nhiệm và đạo đức trong học tập và nghiên cứu.</p>
+                        <h4>Quá trình thực hiện:</h4>
+                        <ul>
+                            <li>Nghiên cứu chính sách của <strong>Trường Đại học Công nghệ - ĐHQGHN</strong> về việc sử dụng AI.</li>
+                            <li>Thực hiện một nhiệm vụ học tập với sự hỗ trợ của AI, có trích dẫn minh bạch.</li>
+                            <li>Phân tích đạo đức: Ranh giới đạo văn, sở hữu trí tuệ, tác động phát triển kỹ năng.</li>
+                            <li>Xây dựng bộ <strong>7 nguyên tắc cá nhân</strong> về sử dụng AI.</li>
+                            <li>Tạo một <strong>Infographic</strong> minh họa "Sử dụng AI có trách nhiệm".</li>
+                        </ul>
+                        <div class="pdf-link-container">
+                            Xem toàn bộ PDF <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan6Bai4_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a><br>
+                            Xem Infographic <a href="https://github.com/huytrung-typ/portfolio-cnsai/blob/main/PDFs/CNSAI_Tuan6Bai4_infographic_TranHuyTrung_25022754.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color);">tại đây</a>
+                        </div>
+                    </div>
+                    <button class="btn view-doc-btn" data-title="Bài 6: Sử dụng AI có trách nhiệm trong học thuật" data-src="PDFs/CNSAI_Tuan6Bai4_TranHuyTrung_25022754.pdf">Xem chi tiết</button>
                 </article>
+
             </div>
 
             <div id="native-viewer" class="native-container hidden" tabindex="0">
-                <div id="loading-spinner" class="spinner hidden">Đang dựng hình tài liệu ở độ phân giải cao...</div>
-                <div id="document-render-area" class="document-area"></div>
+                <div class="viewer-layout">
+                    <div class="viewer-sidebar">
+                        <div id="sidebar-content"></div>
+                    </div>
+                    <div class="viewer-main">
+                        <div id="loading-spinner" class="spinner hidden">Đang load tài liệu...</div>
+                        <div id="document-render-area" class="document-area"></div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -86,5 +209,6 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 </body>
 </html>
