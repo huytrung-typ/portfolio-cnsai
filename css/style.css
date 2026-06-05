@@ -8,21 +8,68 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-color); color: var(--text-primary); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
 
-/* --- HIỆU ỨNG CHUYỂN TRANG TỐI ƯU GPU (HARDWARE ACCELERATED) --- */
+/* HIỆU ỨNG CHUYỂN TRANG TỐI ƯU GPU */
 @keyframes fadeSlideIn {
-    0% { 
-        opacity: 0; 
-        transform: translateY(25px); 
-    }
-    100% { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+    0% { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 .page-transition { 
     animation: fadeSlideIn 0.4s ease-out forwards; 
-    /* Bật tăng tốc phần cứng, ép trình duyệt dùng GPU để render cho mượt */
     will-change: transform, opacity;
+}
+
+/* --- [MỚI] KIỂU DÁNG THANH TIẾN TRÌNH CUỘN MÀN HÌNH --- */
+#global-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%; /* JS sẽ tự động tăng % chiều rộng từ đây */
+    height: 4px;
+    background-color: var(--accent-color);
+    z-index: 2000; /* Đảm bảo nằm trên thanh sticky header */
+    transition: width 0.1s ease-out;
+}
+
+/* --- [MỚI] KIỂU DÁNG NÚT TRỞ VỀ ĐẦU TRANG FLOATING --- */
+#global-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%; /* Ép bo tròn hoàn hảo */
+    background-color: var(--surface-color);
+    color: var(--accent-color);
+    border: 1px solid #ddd;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Trạng thái ẩn mặc định: Mờ đi + Đẩy nhẹ xuống dưới */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Kích hoạt khi cuộn chuột qua ngưỡng của JS */
+#global-back-to-top.activated {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#global-back-to-top:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    transform: translateY(-4px); /* Hiệu ứng nhấc nút lên */
+    box-shadow: 0 6px 18px rgba(9, 132, 227, 0.3);
 }
 
 /* HEADER */
@@ -34,7 +81,7 @@ nav a { text-decoration: none; color: var(--text-primary); font-weight: 500; tra
 nav a:hover { color: var(--accent-color); }
 nav a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
 
-/* BỐ CỤC MỞ RỘNG */
+/* BỐ CỤC */
 .page-container { 
     max-width: 1200px; 
     margin: 0 auto; 
@@ -43,7 +90,6 @@ nav a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent
     width: 100%; 
     transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
 }
-
 .page-container.expanded-mode { max-width: 1600px; }
 .section-title { font-size: 2.2rem; margin-bottom: 2rem; border-bottom: 3px solid var(--accent-color); padding-bottom: 0.5rem; display: inline-block; }
 
@@ -64,40 +110,12 @@ nav a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent
 .btn { background-color: var(--accent-color); color: white; border: none; padding: 0.8rem; border-radius: 6px; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%; font-size: 1rem; margin-top: auto; }
 .btn:hover { background-color: var(--accent-hover); transform: scale(1.02); }
 
-/* --- CẤU TRÚC SPLIT-SCREEN --- */
-.native-container { 
-    width: 100%; 
-    height: auto; 
-    background-color: var(--surface-color); 
-    border-radius: var(--border-radius); 
-    border: 1px solid #ddd;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-    animation: slideUp 0.4s ease;
-    outline: none; 
-}
+/* SPLIT-SCREEN */
+.native-container { width: 100%; height: auto; background-color: var(--surface-color); border-radius: var(--border-radius); border: 1px solid #ddd; box-shadow: 0 10px 30px rgba(0,0,0,0.1); animation: slideUp 0.4s ease; outline: none; }
+.viewer-layout { display: flex; flex-direction: row; align-items: stretch; height: auto; }
 
-.viewer-layout {
-    display: flex;
-    flex-direction: row; 
-    align-items: stretch; 
-    height: auto; 
-}
-
-/* Cột trái */
-.viewer-sidebar {
-    width: 30%;
-    background-color: #f8f9fa;
-    border-right: 1px solid #ddd;
-    border-bottom-left-radius: var(--border-radius);
-}
-
-#sidebar-content {
-    position: sticky;
-    top: 90px;
-    padding: 2.5rem;
-    max-height: calc(100vh - 110px);
-    overflow-y: auto;
-}
+.viewer-sidebar { width: 30%; background-color: #f8f9fa; border-right: 1px solid #ddd; border-bottom-left-radius: var(--border-radius); }
+#sidebar-content { position: sticky; top: 90px; padding: 2.5rem; max-height: calc(100vh - 110px); overflow-y: auto; }
 
 .viewer-sidebar h4 { color: var(--accent-color); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
 .viewer-sidebar h4:first-child { margin-top: 0; }
@@ -105,27 +123,10 @@ nav a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent
 .viewer-sidebar ul { padding-left: 1.5rem; }
 .viewer-sidebar li { margin-bottom: 0.5rem; }
 
-/* Cột phải */
-.viewer-main {
-    width: 70%;
-    background-color: #525659;
-    padding: 2rem 0;
-    height: auto; 
-    box-shadow: inset 10px 0 10px -10px rgba(0,0,0,0.2);
-    border-bottom-right-radius: var(--border-radius);
-}
-
+.viewer-main { width: 70%; background-color: #525659; padding: 2rem 0; height: auto; box-shadow: inset 10px 0 10px -10px rgba(0,0,0,0.2); border-bottom-right-radius: var(--border-radius); }
 .document-area { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 
-.pdf-page-canvas, .native-image { 
-    width: 90%; 
-    max-width: 1200px; 
-    height: auto !important; 
-    background-color: white; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
-    border-radius: 4px; 
-}
-
+.pdf-page-canvas, .native-image { width: 90%; max-width: 1200px; height: auto !important; background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-radius: 4px; }
 .spinner { text-align: center; color: white; font-weight: bold; margin-bottom: 1rem; }
 
 /* TRANG GIỚI THIỆU & TỔNG KẾT */

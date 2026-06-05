@@ -1,8 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // =========================================================================
+    // 1. TÍNH NĂNG TOÀN CỤC: THANH TIẾN TRÌNH & NÚT TRỞ VỀ ĐẦU TRANG (SCROLL UX)
+    // =========================================================================
+    
+    // Tự động sinh thẻ div cho Thanh tiến trình và tiêm vào Body
+    const progressBar = document.createElement('div');
+    progressBar.id = 'global-scroll-progress';
+    document.body.appendChild(progressBar);
+
+    // Tự động sinh thẻ button cho nút Trở về đầu trang và tiêm vào Body
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.id = 'global-back-to-top';
+    backToTopBtn.innerHTML = '↑'; // Sử dụng ký tự mũi tên Unicode chuẩn hệ thống
+    backToTopBtn.setAttribute('aria-label', 'Trở về đầu trang');
+    document.body.appendChild(backToTopBtn);
+
+    // Lắng nghe sự kiện cuộn chuột trên toàn trục Y của trình duyệt
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        // Thuật toán tính toán phần trăm tiến trình cuộn màn hình
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = scrollPercent + '%';
+
+        // Điều khiển ẩn/hiện nút bấm: Chỉ xuất hiện khi cuộn qua vạch 300px
+        if (scrollTop > 300) {
+            backToTopBtn.classList.add('activated');
+        } else {
+            backToTopBtn.classList.remove('activated');
+        }
+    });
+
+    // Bắt sự kiện click để đưa người dùng về đỉnh trang một cách mượt mà
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Cuộn mượt mà chuẩn native
+        });
+    });
+
+
+    // =========================================================================
+    // 2. TÍNH NĂNG RIÊNG: KHU VỰC QUẢN LÝ DỰ ÁN VÀ DỰNG HÌNH PDF (PROJECTS PAGE)
+    // =========================================================================
     const projectsGrid = document.getElementById('projects-grid');
     const mainContainer = document.getElementById('main-container'); 
     
+    // Ngàm chặn hệ thống: Nếu không có grid dự án (ở trang index/summary) thì ngưng chạy đoạn dưới
     if (!projectsGrid) return; 
 
     try {
@@ -38,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 canvas.width = Math.floor(viewport.width * outputScale);
                 canvas.height = Math.floor(viewport.height * outputScale);
-                
                 canvas.style.width = "100%"; 
                 
                 documentArea.appendChild(canvas);
@@ -53,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // SỰ KIỆN BẤM NÚT XEM BÀI TẬP
     viewButtons.forEach(btn => {
         btn.addEventListener('click', async () => {
             const title = btn.getAttribute('data-title');
@@ -73,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btnCloseViewer.classList.remove('hidden');
             nativeViewer.classList.remove('hidden');
 
-            // [TÍNH NĂNG MỚI]: Auto-scroll (Tự động cuộn trang web xuống căn lề hoàn hảo)
             setTimeout(() => {
                 const headerOffset = document.querySelector('.section-header-flex');
                 if(headerOffset) {
@@ -98,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // SỰ KIỆN ĐÓNG TRÌNH XEM
     btnCloseViewer.addEventListener('click', () => {
         mainContainer.classList.remove('expanded-mode');
         
@@ -110,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         documentArea.innerHTML = ''; 
         sidebarContent.innerHTML = '';
 
-        // [TÍNH NĂNG MỚI]: Cuộn mượt mà trở lại danh sách grid
         setTimeout(() => {
             const headerOffset = document.querySelector('.section-header-flex');
             if(headerOffset) {
